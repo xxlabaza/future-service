@@ -5,10 +5,10 @@ jdk:
   - openjdk11
 
 install:
-  ./mvnw compile -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  ./mvnw compile -DskipTests=true -Dmaven.javadoc.skip=true -B -U
 
 script:
-  ./mvnw verify -DskipTests=false -Dmaven.javadoc.skip=true -B -U
+  ./mvnw verify -DskipTests=false -Dmaven.javadoc.skip=true -B
 
 before_deploy:
   - ./mvnw help:evaluate -N -Dexpression=project.version | grep -v '\['
