@@ -1,0 +1,30 @@
+
+language: java
+
+jdk:
+  - openjdk11
+
+install:
+  ./mvnw compile -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+script:
+  ./mvnw verify -DskipTests=false -Dmaven.javadoc.skip=true -B -U
+
+before_deploy:
+  - ./mvnw help:evaluate -N -Dexpression=project.version | grep -v '\['
+  - export project_version=$(./mvnw help:evaluate -N -Dexpression=project.version | grep -v '\[')
+  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=false -B -U
+
+deploy:
+  provider: releases
+  api_key:
+    secure: Seso9P1bRhfID7yUJp3L9aIxW9bbinL4xtr/rUCVvVPCEX3hMplu9CO4BzjcJYcyejenW8QOj8UmxMEtMKYcbl5+72N8Kt49EfmIb6eCHk25WrExRTtb4BLRmVOKow/j611/FmJd3u+ZTtlhw/86+S8ptXshxHv1vfEN2ueO1Bfx//2qCxpvyPGljHorEmfncyXeej+cin2gau9B+GUgV/CXK9nQJ/+YT0dKPN6IcqCaNB0vv1GB7kR5LhUFhd475w51l7ulEoUzQsC/2mC+X1Y6RETeLFCTB2N5sjPlAkcV8XWL7M46Dxzr93tXLPxQlVDYzxmYJznKeziAQX48cnx82TO/VDPBtxRGl5mWq7ry0O6WzZoT4gs3GYUW9NGGrYQwXnJYwNckEERWxMcFPTsplIwalGX35FP67U4httbZFq8t+399MAaxEBTQ3aKB0wjhUWbVwASq8dVkaX7jp5q4S7HuHVg+xOhNvpg7W92SCjdSKqn6HCYScnEcEt29pNs9qI3U5nSbSrZj7kWF9KFz3H6jfcO3HacE5G3DJbq0uZX+B+vaxBQ9YicALVN2wyORqwBy2MCYW4RMS2rOWY7nbx+PMnLoStusNkVdEMwlVHQYm0H4ynKdv6BYgkx4Ns2S/RD9qfwg40vjNVWdjuC90yhlz6MUq7gc236OpRI=
+  file:
+    - "target/future-service-$project_version.jar"
+    - "target/future-service-$project_version-javadoc.jar"
+    - "target/future-service-$project_version-sources.jar"
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: xxlabaza/future-service
+  name: $project_version
