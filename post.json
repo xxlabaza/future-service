@@ -1,0 +1,15 @@
+{
+  "request": {
+    "url": "http://localhost:8989",
+    "method": "delete",
+    "headers": {
+      "Key1": "Value1",
+      "Key2": ["Value2", "Value3"]
+    },
+    "body": "Hello world"
+  },
+  "sendTo": {
+    "url": "localhost:9999/api",
+    "includeResponseHeaders": false
+  }
+}
