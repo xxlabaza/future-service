@@ -112,7 +112,7 @@ class ActionDeserializer extends JsonDeserializer<Action> {
     return ofNullable(node)
         .map(JsonNode::asText)
         .filter(not(String::isEmpty))
-        .map(it -> it.startsWith("http://")
+        .map(it -> it.startsWith("http")
                    ? it
                    : "http://" + it
         )
