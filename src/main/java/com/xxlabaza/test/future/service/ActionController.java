@@ -18,24 +18,23 @@ package com.xxlabaza.test.future.service;
 
 import static org.springframework.http.HttpStatus.ACCEPTED;
 
-import lombok.extern.slf4j.Slf4j;
+import com.xxlabaza.test.future.service.cluster.ClusterActionService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
 @RestController
 class ActionController {
 
   @Autowired
-  ActionService service;
+  ClusterActionService service;
 
   @PostMapping
   @ResponseStatus(ACCEPTED)
   void post (@RequestBody Action action) {
-    log.info("post {}", action);
-    service.invoke(action);
+    service.submit(action);
   }
 }

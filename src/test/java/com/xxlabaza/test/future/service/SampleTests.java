@@ -25,6 +25,8 @@ import static org.springframework.http.HttpMethod.PUT;
 
 import java.net.URI;
 
+import com.xxlabaza.test.future.service.cluster.ClusterActionService;
+
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,11 +36,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = DEFINED_PORT)
+@SpringBootTest(
+    webEnvironment = DEFINED_PORT,
+    properties = "cluster.tcp.enabled=true"
+)
 class SampleTests {
 
   @Autowired
-  ActionService actionService;
+  ClusterActionService actionService;
 
   @Value("http://localhost:${server.port}")
   String host;
@@ -56,13 +61,13 @@ class SampleTests {
             .build()))
         .build();
 
-    actionService.invoke(action);
-    actionService.invoke(action);
-    actionService.invoke(action);
-    actionService.invoke(action);
-    actionService.invoke(action);
+    actionService.submit(action);
+    actionService.submit(action);
+    actionService.submit(action);
+    actionService.submit(action);
+    actionService.submit(action);
 
-    SECONDS.sleep(2);
+    SECONDS.sleep(10);
 
     assertThat(TestController.POST_COUNTER.sum()).isEqualTo(1);
     assertThat(TestController.PUT_COUNTER.sum()).isEqualTo(5);

@@ -30,7 +30,7 @@ limitations under the License.
 
   <groupId>com.xxlabaza.test</groupId>
   <artifactId>future-service</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -69,6 +69,16 @@ limitations under the License.
     	<groupId>org.asynchttpclient</groupId>
     	<artifactId>async-http-client</artifactId>
       <version>2.10.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.ignite</groupId>
+      <artifactId>ignite-spring</artifactId>
+      <version>2.7.6</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.ignite</groupId>
+      <artifactId>ignite-aws</artifactId>
+      <version>2.7.6</version>
     </dependency>
 
     <dependency>

@@ -33,7 +33,7 @@ import org.springframework.http.HttpMethod;
 @Value
 @Builder
 @JsonDeserialize(using = ActionDeserializer.class)
-class Action {
+public class Action {
 
   @NonNull
   Request request;
@@ -43,7 +43,7 @@ class Action {
 
   @Value
   @Builder
-  static class Request {
+  public static class Request {
 
     @NonNull
     URI url;
@@ -63,7 +63,7 @@ class Action {
 
   @Value
   @Builder
-  static class SendTo {
+  public static class SendTo {
 
     @NonNull
     URI url;
