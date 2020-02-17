@@ -77,7 +77,7 @@ class ResponseContainer implements Serializable {
 
     private static final long serialVersionUID = -8070048633834849617L;
 
-    URI url;
+    URI uri;
 
     String method;
 
@@ -86,7 +86,7 @@ class ResponseContainer implements Serializable {
     boolean includeResponseHeaders;
 
     Recipient (@NonNull Action.SendTo sendTo) {
-      url = sendTo.getUrl();
+      uri = sendTo.getUri();
       method = sendTo.getMethod().toString();
       headers = sendTo.getHeaders().orElse(null);
       includeResponseHeaders = sendTo.isIncludeResponseHeaders();

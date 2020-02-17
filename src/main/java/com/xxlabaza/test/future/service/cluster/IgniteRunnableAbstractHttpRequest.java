@@ -40,7 +40,7 @@ abstract class IgniteRunnableAbstractHttpRequest implements IgniteRunnable {
 
   protected CompletableFuture<HttpResponse> make (HttpRequest request) {
     val builder = new RequestBuilder()
-        .setUri(toUri(request.getUrl()))
+        .setUri(toUri(request.getUri()))
         .setMethod(request.getMethod());
 
     val headers = request.getHeaders();

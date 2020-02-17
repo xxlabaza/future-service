@@ -25,6 +25,10 @@ limitations under the License.
   <property name="severity" value="error"/>
   <property name="fileExtensions" value="java, properties, xml"/>
 
+  <module name="BeforeExecutionExclusionFileFilter">
+    <property name="fileNamePattern" value=".*/com/xxlabaza/test/future/service/proto/.*"/>
+  </module>
+
 
   <!-- Checks for Headers                                -->
   <!-- See http://checkstyle.sf.net/config_header.html   -->

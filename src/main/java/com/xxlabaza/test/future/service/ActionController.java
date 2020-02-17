@@ -17,24 +17,37 @@
 package com.xxlabaza.test.future.service;
 
 import static org.springframework.http.HttpStatus.ACCEPTED;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 import com.xxlabaza.test.future.service.cluster.ClusterActionService;
+import com.xxlabaza.test.future.service.proto.Proto;
 
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 class ActionController {
 
   @Autowired
   ClusterActionService service;
 
-  @PostMapping
+  @PostMapping("/action")
   @ResponseStatus(ACCEPTED)
-  void post (@RequestBody Action action) {
+  void post (@RequestBody Proto.Action proto) {
+    val action = Action.from(proto);
     service.submit(action);
+  }
+
+  @ExceptionHandler
+  @ResponseStatus(BAD_REQUEST)
+  void handleException (Throwable throwable) {
+    log.warn("bad reqeust", throwable);
   }
 }

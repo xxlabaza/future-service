@@ -28,6 +28,7 @@ import org.apache.ignite.spi.discovery.tcp.ipfinder.TcpDiscoveryIpFinder;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.elb.TcpDiscoveryElbIpFinder;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.multicast.TcpDiscoveryMulticastIpFinder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -74,6 +75,12 @@ class ConfigurationClusterDiscovery {
     val addresses = properties.getTcp().getAddresses();
     result.setAddresses(addresses);
     return result;
+  }
+
+  @Bean
+  @ConditionalOnMissingBean
+  TcpDiscoveryIpFinder defaultTcpDiscoverySpi () {
+    return new TcpDiscoveryMulticastIpFinder();
   }
 
   @Data

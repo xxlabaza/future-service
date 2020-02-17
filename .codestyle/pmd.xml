@@ -23,6 +23,8 @@ limitations under the License.
 
   <description>PMD Rules</description>
 
+  <exclude-pattern>.*/com/xxlabaza/test/future/service/proto/.*</exclude-pattern>
+
   <rule ref="category/java/bestpractices.xml">
     <exclude name="UseVarargs" />
     <exclude name="SystemPrintln" />

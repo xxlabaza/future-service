@@ -102,5 +102,5 @@ $> ./mvnw clean package docker:build
 ## Package, verify and run
 
 ```bash
-$> ./mvnw clean package verify; and java -jar target/future-service-1.1.0.jar
+$> ./mvnw clean package verify; and java -jar target/future-service-1.1.1.jar
 ```

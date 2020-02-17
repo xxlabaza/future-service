@@ -30,7 +30,7 @@ limitations under the License.
 
   <groupId>com.xxlabaza.test</groupId>
   <artifactId>future-service</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.1</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -46,6 +46,8 @@ limitations under the License.
     <maven.compiler.testSource>${java.version}</maven.compiler.testSource>
 
     <skipAllTests>false</skipAllTests>
+
+    <protoc.version>3.11.4</protoc.version>
   </properties>
 
   <licenses>
@@ -79,6 +81,22 @@ limitations under the License.
       <groupId>org.apache.ignite</groupId>
       <artifactId>ignite-aws</artifactId>
       <version>2.7.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.appulse</groupId>
+      <artifactId>utils-java</artifactId>
+      <version>1.17.2</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+      <version>${protoc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.googlecode.protobuf-java-format</groupId>
+      <artifactId>protobuf-java-format</artifactId>
+      <version>1.4</version>
     </dependency>
 
     <dependency>
@@ -189,7 +207,34 @@ limitations under the License.
   </dependencies>
 
   <build>
+    <extensions>
+      <!-- provides os.detected.classifier (i.e. linux-x86_64, osx-x86_64) property -->
+      <extension>
+        <groupId>kr.motd.maven</groupId>
+        <artifactId>os-maven-plugin</artifactId>
+        <version>1.6.2</version>
+      </extension>
+    </extensions>
+
     <plugins>
+      <plugin>
+        <groupId>org.xolstice.maven.plugins</groupId>
+        <artifactId>protobuf-maven-plugin</artifactId>
+        <version>0.6.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>test-compile</goal>
+            </goals>
+            <configuration>
+              <protocArtifact>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}</protocArtifact>
+              <checkStaleness>true</checkStaleness>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION="1.1.0"
+VERSION="1.1.1"
 DOWNLOAD_URL="https://github.com/xxlabaza/future-service/releases/download/${VERSION}/future-service-${VERSION}.jar"
 
 AWS_ACCESS_KEY=""

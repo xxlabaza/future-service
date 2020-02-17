@@ -53,11 +53,11 @@ class SampleTests {
     val action = Action.builder()
         .request(Action.Request.builder()
             .method(POST)
-            .url(new URI(host + "/post"))
+            .uri(new URI(host + "/post"))
             .build())
         .sendTo(of(Action.SendTo.builder()
             .method(PUT)
-            .url(new URI(host + "/put"))
+            .uri(new URI(host + "/put"))
             .build()))
         .build();
 

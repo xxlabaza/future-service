@@ -39,7 +39,7 @@ class HttpRequest implements Serializable {
 
   private static final long serialVersionUID = -7606825749140975726L;
 
-  URI url;
+  URI uri;
 
   String method;
 
@@ -49,14 +49,14 @@ class HttpRequest implements Serializable {
 
   HttpRequest (@NonNull Action action) {
     val request = action.getRequest();
-    url = request.getUrl();
+    uri = request.getUri();
     method = request.getMethod().name();
     headers = request.getHeaders().orElse(null);
     body = request.getBody().orElse(null);
   }
 
   HttpRequest (@NonNull Recipient recipient, @NonNull HttpResponse response) {
-    url = recipient.getUrl();
+    uri = recipient.getUri();
     method = recipient.getMethod();
     headers = new HashMap<>();
 
