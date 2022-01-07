@@ -47,7 +47,7 @@ limitations under the License.
 
     <skipAllTests>false</skipAllTests>
 
-    <protoc.version>3.11.4</protoc.version>
+    <protoc.version>3.16.1</protoc.version>
   </properties>
 
   <licenses>
